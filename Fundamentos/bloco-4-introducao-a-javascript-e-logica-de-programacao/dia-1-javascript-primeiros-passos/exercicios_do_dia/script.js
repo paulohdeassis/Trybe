@@ -2,7 +2,7 @@ const a = 20
 const b = 12
 const c = 45
 
-
+/* ===
 /*console.log(a+b)
 console.log(a-b)
 console.log(a*b)
