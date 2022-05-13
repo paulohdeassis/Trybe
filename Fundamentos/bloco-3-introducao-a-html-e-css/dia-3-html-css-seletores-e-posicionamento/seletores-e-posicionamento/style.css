@@ -1,0 +1,31 @@
+.odd_number{
+    text-transform: uppercase;
+}
+
+.even_number{
+   background-color: green;
+}
+
+h1, h2, h3, h4 {
+    color: red;
+}
+
+h1 em {
+    border: 1px solid black;
+}
+
+li {
+    font-size: 20px;
+}
+
+li em {
+    font-weight: bold;
+}
+
+ul li.blue_txt{
+    color: blue;
+}
+
+ul li.java{
+    background-color: pink;
+}
