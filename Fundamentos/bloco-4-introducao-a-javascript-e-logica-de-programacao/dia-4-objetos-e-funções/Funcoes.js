@@ -101,25 +101,56 @@ getLargestName (['José', 'Lucas', 'Nádia', 'Fernanda', 'Cairo', 'Joana'])*/
 
 /*================================ Quinto Exercício ==================================*/
 
-function findRepeatNumber (numbers){
+
+/*function findRepeatNumber(numbers) {
+   let repeatNumber = 0;
+   let countNumber = 0;
+   let repeatNumberIndex = 0;
+
+   for (let i = 0; i < numbers.length; i += 1) {
+       for (let index = 0; index < numbers.length; index += 1){
+           if (numbers[i] === numbers[index]) {
+               repeatNumber += 1; 
+           }
+       }
+       if (repeatNumber > countNumber) {
+           countNumber = repeatNumber;
+           repeatNumberIndex = i;
+       }
+       repeatNumber = 0;
+   }
+   return numbers[repeatNumberIndex];
+}
    
-   let repeatNumber = 0
-   for( let number in numbers){
-      
-      for( let index = 0; index > numbers.length; index +=1){
 
-         if ( numbers[number] ==  numbers[index]){
+console.log(findRepeatNumber([2, 3, 2, 5, 8, 2, 3]));*/
 
-            
-             repeatNumber = numbers[number]
-         }
+/*================================ Sexto Exercício ==================================*/
 
-      }
+/*function getNumberSum(number){
+   let result = 0
+   for ( let counter = 0;  counter <= number; counter += 1){
 
-
+   result += counter 
    }
 
-   console.log(repeatNumber)
+   console.log(result)
 }
 
-findRepeatNumber([2, 3, 2, 5, 8, 2, 3])
+
+
+getNumberSum(5)*/
+
+/*================================ Sétimo Exercício ==================================*/
+
+/*function findWordEnd(word, end){
+   if(word[word.length-2] === end[end.length-2] && word[word.length-1] === end[end.length-1]){
+      return true
+   }
+
+   else{
+      return false
+   }
+}
+
+console.log(findWordEnd('frango', 'go'))*/
