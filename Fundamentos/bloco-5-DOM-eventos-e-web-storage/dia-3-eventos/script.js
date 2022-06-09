@@ -15,20 +15,44 @@ function createDaysOfTheWeek() {
 
   
   
-  // Escreva seu código abaixo.
+// Escreva seu código abaixo.
 
 
 const dezDaysList = [29, 30, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
  
-let daysOfHolidays = ['24','25','31']
+const daysOfHolidays = ['24','25','31']
   
-let fridayDates = ['4', '11', '18', '25']
-  
-  
+const fridayDates = ['4', '11', '18', '25'] 
+
 createMonthDays(dezDaysList,'day','#days', daysOfHolidays, fridayDates)
-createButtons('Feriados','btn-holiday', '.buttons-container')
 
+createButtons('Feriados','btn-holiday', '.buttons-container') 
 
+const holidayBtn = document.querySelector("#btn-holiday")
+
+const holidayElements = document.querySelectorAll('.holiday') 
+
+const fridays = document.querySelectorAll('.friday')      
+
+createButtons('Sexta-feira','btn-friday','.buttons-container');
+
+const fridayBtn = document.querySelector('#btn-friday');
+
+holidayBtn.addEventListener('click', highlightHolidays);
+
+fridayBtn.addEventListener('click', changeFridayText);
+
+const days = document.querySelector('#days')
+
+days.addEventListener('mouseover', highlightDays)
+
+days.addEventListener('mouseout',removeHighLight)
+
+AddTask('.my-tasks','Estudar para o projeto')
+
+createLabel ('#ccff00', '.my-tasks', 'task')
+
+// Cria os dias do mês baseado num  array com o número de dias
 function createMonthDays(numberOfDays, clas, parent, holidays, fridays ){
 
   
@@ -80,6 +104,7 @@ function createMonthDays(numberOfDays, clas, parent, holidays, fridays ){
 
 }
 
+//Cria um botão a partir do texto, id e o parent
 function createButtons (text, id, parent){
   let elementParent = document.querySelector(parent)
 
@@ -95,21 +120,133 @@ function createButtons (text, id, parent){
   
   
 
+};
+
+// Muda a cor do fundo dos feriados
+function highlightHolidays(){ 
+    for (let holiday in holidayElements){
+        if(holidayElements[holiday].style.backgroundColor === 'green'){
+            holidayElements[holiday].style.backgroundColor = 'rgb(238,238,238)'; 
+        } else {
+            holidayElements[holiday].style.backgroundColor = 'green';
+        };
+    };
+};
+
+//Muda o texto das sextas-feiras ao cliclar no botão
+function changeFridayText(){ 
+
+  let fridayText = 'Sexta-feira'
+  for (let friday in fridays){
+      if(fridays[friday].innerText === fridayText){
+          fridays[friday].innerHTML = fridayDates[friday]
+      } else {
+          fridays[friday].innerHTML =  fridayText;
+      };
+  };
+};
+
+function highlightDays(event) {
+
+  event.target.style.fontSize = '28px';
+  event.target.style.fontWeight = 'bold';
+  
+};
+
+function removeHighLight (event){
+
+  event.target.style.fontSize = '20px';
+  event.target.style.fontWeight = '150';
+
+
 }
 
-function highlightHolidays( highlightedColor, button){
+function AddTask (parent, task){
+  let newTask = document.createElement('span')
+  newTask.innerText=task
 
-  document.querySelector(button).addEventListener('click', function(){
+  elementParent = document.querySelector(parent)
 
-    let holidayElements = document.querySelectorAll('.holiday')
+  elementParent.appendChild(newTask)
+}
 
-    for (let index = 0; index < holidayElements.length; index +=1){      
+function createLabel (color, parent, clas){
 
-      holidayElements[index].style.backgroundColor = highlightedColor
+  let newLabel = document.createElement('div')
 
+  newLabel.classList.add(clas)
+
+  newLabel.style.backgroundColor = color
+
+  labelParent = document.querySelector(parent)
+
+  labelParent.appendChild(newLabel)
+
+}
+
+let task = document.querySelector('.task');
+
+let selectedTask = document.getElementsByClassName('task selected');
+
+task.addEventListener('click', function(event){
+
+    if(selectedTask.length === 0){
+        event.target.className = 'task selected';
+
+    } else {
+        event.target.className = 'task';
     }
+});
 
-  })
+let taskColor = task.style.backgroundColor;
+
+days.addEventListener('click', function(event){
+    let eventColor = event.target.style.color;
+
+    if(selectedTask.length > 0 && eventColor !== taskColor){
+
+    let taskBackground = selectedTask[0].style.backgroundColor;
+
+    event.target.style.color = taskBackground;
+    
+    } else if(eventColor === taskColor && selectedTask.length !== 0) {
+        event.target.style.color = 'rgb(119,119,119)';
+    };
+});
+
+
+let appointmentBtn = document.querySelector('#btn-add')
+
+let appointmentInput = document.querySelector('#task-input')
+
+let parent = document.querySelector('.input-container')
+
+
+appointmentBtn.addEventListener('click',createAppointment)
+
+appointmentInput.addEventListener('keyup', function(event){
+  if(event.key === 'Enter' && appointmentInput.value.length > 0){
+
+      let newAppointment = document.createElement('li');
+
+      newAppointment.innerText = appointmentInput.value;
+
+      parent.appendChild(newAppointment);
+
+      appointmentInput.value = '';
+  };
+});
+
+function createAppointment(){
+
+  const nameOfAppointment = appointmentInput.value
+
+  let appointment = document.createElement('li')
+
+  appointment.innerText = nameOfAppointment
+
+  parent.appendChild(appointment)
+
+  appointmentInput.value = ''
+
 }
-
-highlightHolidays ("ccff00", '#btn-holiday')
